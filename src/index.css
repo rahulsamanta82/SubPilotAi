@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Dynamically mapped theme variables */
+  --color-bg: var(--bg-color, #05050A);
+  --color-sidebar: var(--sidebar-color, #0A0914);
+  --color-surface: var(--surface-color, #110F22);
+  --color-surface-border: var(--surface-border-color, rgba(124, 58, 237, 0.15));
+  --color-text-dim: var(--text-dim-color, #9CA3AF);
+  --color-text-main: var(--text-main-color, #FAF9FF);
+  --color-accent: var(--accent-color, #8B5CF6);
+  --color-success: var(--success-color, #10B981);
+  --color-warning: var(--warning-color, #F59E0B);
+}
+
+/* Default / Dark Mode Properties - Midnight Amethyst & Gold */
+:root {
+  --bg-color: #05050A;
+  --sidebar-color: #0A0914;
+  --surface-color: #110F22;
+  --surface-border-color: rgba(139, 92, 246, 0.12);
+  --text-dim-color: #8C8B9E;
+  --text-main-color: #FAF9FE;
+  --accent-color: #8B5CF6;
+  --success-color: #10B981;
+  --warning-color: #FBBF24;
+}
+
+/* Light Theme Variable Overrides - Alabaster Warm Pearl & Royal Indigo */
+:root.light {
+  --bg-color: #F8F7FA;
+  --sidebar-color: #FFFFFF;
+  --surface-color: #FFFFFF;
+  --surface-border-color: rgba(99, 102, 241, 0.16);
+  --text-dim-color: #4A4860;
+  --text-main-color: #0F0E23;
+  --accent-color: #4F46E5;
+  --success-color: #059669;
+  --warning-color: #D97706;
+}
+
+/* Fix for hardcoded light/white text classes inside light theme, ensuring they render dark except on active colored backgrounds */
+:root.light *:not(.dark-card):not(.dark-card *) .text-white:not(button):not(button *):not(.bg-accent):not(.bg-accent *):not(.bg-success):not(.bg-success *):not(.bg-rose-500):not(.bg-rose-500 *):not(.bg-emerald-600):not(.bg-emerald-600 *):not(.bg-purple-600):not(.bg-purple-600 *):not(.bg-indigo-600):not(.bg-indigo-600 *):not(.bg-blue-600):not(.bg-blue-600 *):not(.bg-gradient-to-r *):not(.bg-gradient-to-br *):not([class*="from-"]):not([class*="via-"]):not([class*="to-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-slate-100:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-zinc-100:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-gray-100:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-slate-200:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-zinc-200:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-gray-200:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]) {
+  color: var(--color-text-main) !important;
+}
+
+:root.light *:not(.dark-card):not(.dark-card *) .text-slate-300:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-zinc-300:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-gray-300:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-slate-400:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-zinc-400:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]),
+:root.light *:not(.dark-card):not(.dark-card *) .text-gray-400:not(button):not(button *):not([class*="bg-"]):not([class*="from-"]) {
+  color: var(--color-text-dim) !important;
+}
+
+/* Ensure secondary details aren't transparent or invisible */
+:root.light *:not(.dark-card):not(.dark-card *) .text-white\/40,
+:root.light *:not(.dark-card):not(.dark-card *) .text-white\/50,
+:root.light *:not(.dark-card):not(.dark-card *) .text-white\/60,
+:root.light *:not(.dark-card):not(.dark-card *) .text-white\/70,
+:root.light *:not(.dark-card):not(.dark-card *) .text-white\/35 {
+  color: var(--color-text-dim) !important;
+}
+
+/* Make sure borders of grids are neat and crisp in light mode */
+:root.light .border-surface-border\/50 {
+  border-color: rgba(99, 102, 241, 0.12) !important;
+}
+:root.light .border-surface-border\/30 {
+  border-color: rgba(99, 102, 241, 0.08) !important;
+}
+
+/* Elegant glassmorphism and subtle background styling */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(251, 191, 36, 0.03) 0%, transparent 40%);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Elegant Premium Card Utilities */
+.premium-card {
+  position: relative;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-surface-border);
+  border-radius: 1.25rem; /* 20px */
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.25s ease;
+}
+
+.premium-card:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 40px rgba(139, 92, 246, 0.08);
+}
+
+.premium-glow-text {
+  background: linear-gradient(135deg, var(--color-text-main) 30%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Beautiful Animated Borders & Glowing Accents */
+@keyframes neonPulse {
+  0%, 100% { border-color: rgba(139, 92, 246, 0.15); box-shadow: 0 0 15px rgba(139, 92, 246, 0.05); }
+  50% { border-color: rgba(139, 92, 246, 0.35); box-shadow: 0 0 25px rgba(139, 92, 246, 0.15); }
+}
+
+.animated-glow-border {
+  animation: neonPulse 4s infinite ease-in-out;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Custom scrollbar to keep layout clean */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.3);
+}

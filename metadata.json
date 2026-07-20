@@ -1,0 +1,7 @@
+{
+  "name": "SubPilot AI",
+  "description": "AI Powered Subscription & SaaS Spend Optimizer",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  
+}

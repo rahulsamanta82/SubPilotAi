@@ -1,0 +1,20 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+# Firebase Admin SDK
+src/backend/config/firebase-admin.json
+
+# Environment files
+.env
+.env.local
+# Environment
+.env
+.env.local
+
+# Firebase Admin
+src/backend/config/firebase-admin.json

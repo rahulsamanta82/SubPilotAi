@@ -1,0 +1,90 @@
+{
+  "entities": {
+    "subscription": {
+      "title": "Subscription",
+      "description": "A tracked software subscription or recurring SaaS expense.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "currency": { "type": "string" },
+        "cycle": { "type": "string", "enum": ["monthly", "yearly", "quarterly", "weekly"] },
+        "category": { "type": "string" },
+        "startDate": { "type": "string" },
+        "nextRenewalDate": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "paused", "trialing", "cancelled"] },
+        "owner": { "type": "string" },
+        "seatsUsed": { "type": "number" },
+        "seatsTotal": { "type": "number" },
+        "notes": { "type": "string" },
+        "url": { "type": "string" }
+      },
+      "required": ["userId", "name", "price", "currency", "cycle", "category", "startDate", "nextRenewalDate", "status"]
+    },
+    "uploadHistory": {
+      "title": "Upload History",
+      "description": "A record of CSV, Excel, or bank statements uploaded and analyzed by the user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileSize": { "type": "number" },
+        "fileType": { "type": "string" },
+        "uploadedAt": { "type": "string" },
+        "detectedCount": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["userId", "fileName", "fileSize", "fileType", "uploadedAt", "detectedCount", "status"]
+    },
+    "profile": {
+      "title": "User Profile",
+      "description": "User profile details including custom display name, phone number, and avatar image.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "profilePic": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "name", "updatedAt"]
+    },
+    "payment": {
+      "title": "Payment Transaction",
+      "description": "An audited record of a completed or pending subscription payment.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "subscriptionId": { "type": "string" },
+        "subscriptionName": { "type": "string" },
+        "paymentDate": { "type": "string" },
+        "amountPaid": { "type": "number" },
+        "currency": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "status": { "type": "string", "enum": ["completed", "pending", "failed"] },
+        "referenceNumber": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["userId", "subscriptionId", "subscriptionName", "paymentDate", "amountPaid", "currency", "paymentMethod", "status"]
+    }
+  },
+  "firestore": {
+    "subscriptions": {
+      "schema": "subscription",
+      "description": "List of user-tracked SaaS subscriptions and costs"
+    },
+    "upload_history": {
+      "schema": "uploadHistory",
+      "description": "Logs of user spreadsheet and bank statement uploads"
+    },
+    "profiles": {
+      "schema": "profile",
+      "description": "Customizable user personal profiles"
+    },
+    "payments": {
+      "schema": "payment",
+      "description": "Audited payment transactions for user subscriptions"
+    }
+  }
+}
