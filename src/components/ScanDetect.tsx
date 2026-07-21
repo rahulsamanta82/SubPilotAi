@@ -564,26 +564,28 @@ Date,Description,Amount,Type
   };
 
   const handleImport = async () => {
-    if (selectedIndices.length === 0) return;
-    const subsToImport = results
-      .filter((_, i) => selectedIndices.includes(i))
-      .map(item => ({
-        name: item.name,
-        price: item.price,
-        currency: item.currency || 'USD',
-        cycle: item.cycle || 'monthly',
-        category: item.category || 'Other',
-        startDate: item.startDate || new Date().toISOString().split('T')[0],
-        nextRenewalDate: item.nextRenewalDate || new Date().toISOString().split('T')[0],
-        status: item.status || 'active',
-        owner: 'Personal',
-        notes: item.reason,
-      }));
+  if (selectedIndices.length === 0) return;
 
-    await onImport(subsToImport);
-    setResults([]);
-    setInputText('');
-  };
+  const subsToImport = results
+    .filter((_, i) => selectedIndices.includes(i))
+    .map(item => ({
+      userId: activeUserId, // ✅ Add this line
+      name: item.name,
+      price: item.price,
+      currency: item.currency || 'USD',
+      cycle: item.cycle || 'monthly',
+      category: item.category || 'Other',
+      startDate: item.startDate || new Date().toISOString().split('T')[0],
+      nextRenewalDate: item.nextRenewalDate || new Date().toISOString().split('T')[0],
+      status: item.status || 'active',
+      owner: 'Personal',
+      notes: item.reason,
+    }));
+
+  await onImport(subsToImport);
+  setResults([]);
+  setInputText('');
+};
 
   const formatSize = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
