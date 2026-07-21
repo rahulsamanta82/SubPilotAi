@@ -6,32 +6,15 @@ import {
   chatController,
   syncDataController
 } from '../controllers/api.controller';
-import { syncUserController } from '../controllers/auth.controller';
+import { 
+  syncUserController, 
+  registerUserController, 
+  loginUserController, 
+  getUserSubscriptionsController, 
+  getUserPaymentsController 
+} from '../controllers/auth.controller';
 import { requestLogger } from '../middleware/logger';
 import { verifyFirebaseToken } from '../middleware/auth';
-
-const router = Router();
-
-// Apply request logging specific to API paths
-router.use(requestLogger);
-
-// Setup API endpoint mappings
-router.post('/detect', detectController);
-router.post('/optimize', optimizeController);
-router.post('/forecast', forecastController);
-router.post('/chat', chatController);
-router.post('/sync/data', syncDataController);
-
-// Auth Sync Route (Verifies Firebase token and syncs to MongoDB Atlas)
-router.post('/auth/sync', verifyFirebaseToken, syncUserController);
-
-
-
-
-
-
-
-
 
 // Import the 100 required API endpoints
 import {
@@ -55,7 +38,9 @@ import {
   clearAuditLogs, getSmsLogHistory, triggerManualWebhook, getActiveConnectionsCount, resetAllWebhooks,
   getDatabaseBackups, createDatabaseBackup, restoreDatabaseFromBackup, deleteDatabaseBackup, getDatabaseStats,
   runDatabaseMaintenance, checkApiHealth, clearSystemCaches, getMaintenanceWindows, setMaintenanceMode
-} 
+} from '../controllers/auto.controller';
+
+const router = Router();
 
 // Apply request logging specific to API paths
 router.use(requestLogger);
@@ -70,6 +55,13 @@ router.post('/sync/data', syncDataController);
 // Auth Sync Route (Verifies Firebase token and syncs to MongoDB Atlas)
 router.post('/auth/sync', verifyFirebaseToken, syncUserController);
 
+// Direct MongoDB Cloud Auth Routes (no local fallback saving)
+router.post('/auth/register', registerUserController);
+router.post('/auth/login', loginUserController);
+
+// Direct MongoDB Cloud Data Fetching Routes
+router.get('/subscriptions/user/:userId', getUserSubscriptionsController);
+router.get('/payments/user/:userId', getUserPaymentsController);
 
 // ----------------------------------------------------
 // 70 MANDATORY SYSTEM ROUTE MAPPINGS (REST & CONTROLS)
@@ -195,27 +187,4 @@ router.post('/db/cache/clear', clearSystemCaches);
 router.get('/db/maintenance-windows', getMaintenanceWindows);
 router.post('/db/maintenance-mode', setMaintenanceMode);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default router;
-
-
-
-
-
-
-

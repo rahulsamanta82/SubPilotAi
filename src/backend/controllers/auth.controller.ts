@@ -1,4 +1,4 @@
-import { Response, NextFunction } from 'express';
+
 import mongoose from 'mongoose';
 import { AuthenticatedRequest } from '../middleware/auth';
 import { User } from '../models/User';
@@ -16,7 +16,7 @@ import { Settings } from '../models/Settings';
 export async function syncUserController(
   req: AuthenticatedRequest,
   res: Response,
-  next: NextFunction
+  
 ): Promise<void> {
   try {
     if (!req.user) {
@@ -125,4 +125,46 @@ export async function syncUserController(
     console.error('==================================================');
     res.status(500).json({ error: 'Internal Server Error while synchronizing user profile.' });
   }
+}
+
+import { Request, Response } from "express";
+
+export async function registerUserController(
+  req: Request,
+  res: Response
+) {
+  res.json({
+    success: true,
+    message: "Register API"
+  });
+}
+
+export async function loginUserController(
+  req: Request,
+  res: Response
+) {
+  res.json({
+    success: true,
+    message: "Login API"
+  });
+}
+
+export async function getUserSubscriptionsController(
+  req: Request,
+  res: Response
+) {
+  res.json({
+    success: true,
+    subscriptions: []
+  });
+}
+
+export async function getUserPaymentsController(
+  req: Request,
+  res: Response
+) {
+  res.json({
+    success: true,
+    payments: []
+  });
 }
