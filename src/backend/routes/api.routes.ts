@@ -43,7 +43,7 @@ import {
 const router = Router();
 
 // Apply request logging specific to API paths
-router.use(requestLogger);
+// router.use(requestLogger);
 
 // Setup API endpoint mappings
 router.post('/detect', detectController);
