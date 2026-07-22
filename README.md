@@ -380,7 +380,7 @@ SubPilot AI includes **100+ REST API endpoints** organized into the following mo
 ### 🚀 Frontend (Vercel)
 **SubPilot AI Web App**
 
-🔗 https://sub-pilot-ai-o3yu.vercel.app/
+https://subpilot-backend.onrender.com/
 
 ### ⚙️ Backend API (Render)
 
@@ -393,13 +393,13 @@ SubPilot AI includes **100+ REST API endpoints** organized into the following mo
 ## 📡 API Base URL
 
 ```text
-https://subpilotai.onrender.com/api
+https://subpilot-backend.onrender.com/
 ```
 
 Example:
 
 ```http
-GET https://subpilotai.onrender.com/api/health
+https://subpilot-backend.onrender.com/
 ```
 
 # ⭐ Support
